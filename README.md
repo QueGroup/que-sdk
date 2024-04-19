@@ -1,2 +1,1 @@
-# que-sdk
-Que SDK
+# Que SDK
