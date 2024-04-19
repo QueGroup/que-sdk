@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "que_sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["DavidRomanovizc"]
 license = "MIT LICENSE"
