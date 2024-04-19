@@ -3,14 +3,14 @@ from typing import (
     Any,
 )
 
-from que.clients import (
+from que_sdk.clients import (
     AuthClient,
     RoleClient,
     UserClient,
 )
 
 # noinspection PyProtectedMember
-from que.schemas import (
+from que_sdk.schemas import (
     LoginSchema,
     ResetPasswordSchema,
     RoleSchema,
@@ -18,7 +18,7 @@ from que.schemas import (
     TMELoginSchema,
     UserSchema,
 )
-from que.types import (
+from que_sdk.types import (
     ClientsNameT,
     FlexibleResponseT,
     ResponseT,

@@ -6,9 +6,7 @@ from unittest.mock import (
 
 import pytest
 
-from que import (
-    Client,
-)
+from que_sdk import Client
 
 
 @pytest.mark.asyncio
@@ -31,7 +29,7 @@ async def test_signup():
         },
     ]
 
-    with patch("que.Client", new=mock_response):
+    with patch("que_sdk.Client", new=mock_response):
         client = Client()
         response = await client.get_users()
 

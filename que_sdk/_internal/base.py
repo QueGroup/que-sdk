@@ -11,7 +11,7 @@ from typing import (
 import backoff
 import httpx
 
-from que._internal.auth import (
+from que_sdk._internal.auth import (
     JWTAuth,
 )
 
