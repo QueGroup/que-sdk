@@ -6,7 +6,9 @@ from unittest.mock import (
 
 import pytest
 
-from que_sdk import Client
+from que_sdk import (
+    QueClient,
+)
 
 
 @pytest.mark.asyncio
@@ -29,8 +31,8 @@ async def test_signup():
         },
     ]
 
-    with patch("que_sdk.Client", new=mock_response):
-        client = Client()
+    with patch("que_sdk.QueClient", new=mock_response):
+        client = QueClient()
         response = await client.get_users()
 
     assert response[0] == http.HTTPStatus.OK

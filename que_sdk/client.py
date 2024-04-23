@@ -24,10 +24,10 @@ from que_sdk.types import (
     ResponseT,
 )
 
-__all__ = ("Client",)
+__all__ = ("QueClient",)
 
 
-class Client:
+class QueClient:
     def __init__(self) -> None:
         self._clients = {
             "auth": AuthClient(),

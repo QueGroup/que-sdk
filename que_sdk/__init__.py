@@ -1,5 +1,5 @@
 from .client import (
-    Client,
+    QueClient,
 )
 from .schemas import (
     LoginSchema,
@@ -15,7 +15,7 @@ from .types import (
 )
 
 __all__ = (
-    "Client",
+    "QueClient",
     "LoginSchema",
     "ResetPasswordSchema",
     "RoleSchema",
