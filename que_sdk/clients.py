@@ -72,7 +72,7 @@ class UserClient(BaseClient):
         :param access_token: access token
         :return: status code
         """
-        url = f"{self._base_url}/users/me/"
+        url = f"{self._base_url}/users/me/reactivate/"
         status_code, _ = await self._make_request(
             method="POST",
             url=url,
