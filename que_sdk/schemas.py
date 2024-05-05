@@ -23,6 +23,7 @@ class SignUpSchema(BaseSchema):
 class LoginSchema(BaseSchema):
     username: str
     password: str
+    telegram_id: int | None = None
 
 
 @dataclasses.dataclass
