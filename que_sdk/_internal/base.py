@@ -20,7 +20,7 @@ __all__ = ("BaseClient",)
 
 class BaseClient:
     def __init__(self) -> None:
-        self._base_url = "http://127.0.0.1:8080/api/v1"
+        self._base_url = "http://0.0.0.0:8080/api/v1"
         self.log = logging.getLogger(self.__class__.__name__)
 
     @backoff.on_exception(
