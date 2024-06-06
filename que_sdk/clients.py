@@ -205,10 +205,10 @@ class ProfileClient(BaseClient):
 
     async def get_profile(
         self,
-        profile_id: int,
+        user_id: int,
         access_token: str,
     ) -> ResponseT[dict[str, Any]]:
-        url = f"{self._base_url}/profiles/{profile_id}/"
+        url = f"{self._base_url}/profiles/{user_id}"
         status_code, response = await self._make_request(
             method="GET",
             url=url,

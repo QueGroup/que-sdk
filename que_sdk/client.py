@@ -239,12 +239,10 @@ class QueClient:
         return await client.create_profile(data_in=data_in, access_token=access_token)
 
     async def get_profile(
-        self, *, profile_id: int, access_token: str
+        self, *, user_id: int, access_token: str
     ) -> ResponseT[dict[str, Any]]:
         client = self.get_client(client_name="profile")
-        return await client.get_profile(
-            profile_id=profile_id, access_token=access_token
-        )
+        return await client.get_profile(user_id=user_id, access_token=access_token)
 
     async def update_profile(
         self,
