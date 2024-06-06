@@ -12,7 +12,7 @@ from que_sdk import (
 
 
 @pytest.mark.asyncio
-async def test_signup():
+async def test_get_users():
     mock_response = AsyncMock()
     mock_response.json.return_value = [
         {
@@ -27,7 +27,7 @@ async def test_signup():
             "language": "fr",
             "id": 200,
             "telegram_id": 1234,
-            "roles": [{"title": "newRole", "id": 5}],
+            "roles": {"title": "newRole", "id": 5},
         },
     ]
 
@@ -35,4 +35,5 @@ async def test_signup():
         client = QueClient()
         response = await client.get_users()
 
+    assert len(response) == 2
     assert response[0] == http.HTTPStatus.OK

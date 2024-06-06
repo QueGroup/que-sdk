@@ -30,6 +30,7 @@ class BaseClient:
     )
     async def _make_request(
         self,
+        *,
         method: Literal["GET", "POST", "PUT", "PATCH", "DELETE"],
         url: str,
         access_token: str | None = None,
