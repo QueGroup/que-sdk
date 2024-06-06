@@ -1,4 +1,5 @@
 import dataclasses
+import datetime
 from typing import (
     Any,
 )
@@ -50,3 +51,29 @@ class ResetPasswordSchema(BaseSchema):
     old_password: str
     new_password: str
     repeat_password: str
+
+
+@dataclasses.dataclass
+class ProfileCreateSchema(BaseSchema):
+    first_name: str
+    gender: str
+    city: str
+    latitude: float
+    longitude: float
+    birthdate: datetime.datetime
+    description: str
+    interested_in: str
+    hobbies: list[str]
+
+
+@dataclasses.dataclass
+class ProfileUpdateSchema(BaseSchema):
+    first_name: str | None = None
+    gender: str | None = None
+    city: str | None = None
+    latitude: float | None = None
+    longitude: float | None = None
+    birthdate: datetime.datetime | None = None
+    description: str | None = None
+    interested_in: str | None = None
+    hobbies: list[str] | None = None

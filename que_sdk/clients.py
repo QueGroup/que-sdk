@@ -9,6 +9,8 @@ from que_sdk._internal import (
 )
 from que_sdk.schemas import (
     LoginSchema,
+    ProfileCreateSchema,
+    ProfileUpdateSchema,
     ResetPasswordSchema,
     RoleSchema,
     SignUpSchema,
@@ -20,7 +22,12 @@ from que_sdk.types import (
     ResponseT,
 )
 
-__all__ = ("UserClient", "AuthClient", "RoleClient")
+__all__ = (
+    "UserClient",
+    "AuthClient",
+    "RoleClient",
+    "ProfileClient",
+)
 
 
 class UserClient(BaseClient):
@@ -174,6 +181,63 @@ class RoleClient(BaseClient):
     ) -> http.HTTPStatus:
         url = f"{self._base_url}/roles/{role_id}/"
         status_code, _ = await self._make_request(
+            method="DELETE",
+            url=url,
+            access_token=access_token,
+        )
+        return http.HTTPStatus(status_code)
+
+
+class ProfileClient(BaseClient):
+    async def create_profile(
+        self,
+        data_in: ProfileCreateSchema,
+        access_token: str,
+    ) -> ResponseT[dict[str, Any]]:
+        url = f"{self._base_url}/profiles/"
+        status_code, response = await self._make_request(
+            method="POST",
+            url=url,
+            access_token=access_token,
+            json=data_in.model_dump(),
+        )
+        return http.HTTPStatus(status_code), response
+
+    async def get_profile(
+        self,
+        profile_id: int,
+        access_token: str,
+    ) -> ResponseT[dict[str, Any]]:
+        url = f"{self._base_url}/profiles/{profile_id}/"
+        status_code, response = await self._make_request(
+            method="GET",
+            url=url,
+            access_token=access_token,
+        )
+        return http.HTTPStatus(status_code), response
+
+    async def update_profile(
+        self,
+        profile_id: int,
+        data_in: ProfileUpdateSchema,
+        access_token: str,
+    ) -> ResponseT[dict[str, Any]]:
+        url = f"{self._base_url}/profiles/{profile_id}"
+        status_code, response = await self._make_request(
+            method="DELETE",
+            url=url,
+            access_token=access_token,
+            json=data_in.model_dump(),
+        )
+        return http.HTTPStatus(status_code), response
+
+    async def delete_profile(
+        self,
+        profile_id: int,
+        access_token: str,
+    ) -> http.HTTPStatus:
+        url = f"{self._base_url}/profiles/{profile_id}"
+        status_code, response = await self._make_request(
             method="DELETE",
             url=url,
             access_token=access_token,
