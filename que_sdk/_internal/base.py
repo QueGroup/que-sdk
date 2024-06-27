@@ -10,6 +10,9 @@ from typing import (
 
 import backoff
 import httpx
+from httpx._types import (
+    RequestFiles,
+)
 
 from que_sdk._internal.auth import (
     JWTAuth,
@@ -38,6 +41,7 @@ class BaseClient:
         headers: Mapping[str, str] | None = None,
         data: Mapping[str, str] | None = None,
         json: Mapping[str, str] | None = None,
+        files: RequestFiles | None = None,
     ) -> tuple[int, Any]:
         """Make request and return decoded json response"""
         ssl_context = ssl.SSLContext()
@@ -66,6 +70,7 @@ class BaseClient:
                 headers=headers,
                 data=data,
                 auth=auth,
+                files=files,
             )
             status = response.status_code
 
