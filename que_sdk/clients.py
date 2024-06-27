@@ -1,6 +1,7 @@
 import http
 from typing import (
     Any,
+    BinaryIO,
 )
 
 # noinspection PyProtectedMember
@@ -27,6 +28,7 @@ __all__ = (
     "AuthClient",
     "RoleClient",
     "ProfileClient",
+    "PhotoClient",
 )
 
 
@@ -243,3 +245,29 @@ class ProfileClient(BaseClient):
             access_token=access_token,
         )
         return http.HTTPStatus(status_code)
+
+
+class PhotoClient(BaseClient):
+    async def upload_photo(
+        self, access_token: str, file: BinaryIO
+    ) -> ResponseT[dict[str, Any]]:
+        url = f"{self._base_url}/photos/"
+        status_code, response = await self._make_request(
+            method="POST",
+            url=url,
+            access_token=access_token,
+            files={"file": file},
+            headers={"Content-Type": "multipart/form-data; boundary=boundary"},
+        )
+        return http.HTTPStatus(status_code), response
+
+    async def get_all_photos(
+        self, access_token: str
+    ) -> ResponseT[list[dict[str, Any]]]:
+        url = f"{self._base_url}/photos/"
+        status_code, response = await self._make_request(
+            method="GET",
+            url=url,
+            access_token=access_token,
+        )
+        return http.HTTPStatus(status_code), response

@@ -1,11 +1,13 @@
 import http
 from typing import (
     Any,
+    BinaryIO,
     Literal,
 )
 
 from que_sdk.clients import (
     AuthClient,
+    PhotoClient,
     ProfileClient,
     RoleClient,
     UserClient,
@@ -37,10 +39,11 @@ class QueClient:
             "user": UserClient(),
             "role": RoleClient(),
             "profile": ProfileClient(),
+            "photo": PhotoClient(),
         }
 
     def get_client(
-        self, *, client_name: Literal["auth", "user", "role", "profile"]
+        self, *, client_name: Literal["auth", "user", "role", "profile", "photo"]
     ) -> Any:
         if client_name not in self._clients:
             raise ValueError(f"Unknown client: {client_name}")
@@ -264,3 +267,20 @@ class QueClient:
     ) -> http.HTTPStatus:
         client = self.get_client(client_name="profile")
         return await client.delete_profile(profile_id, access_token=access_token)
+
+    async def upload_photo(
+        self,
+        *,
+        file: BinaryIO,
+        access_token: str,
+    ) -> ResponseT[dict[str, Any]]:
+        client = self.get_client(client_name="photo")
+        return await client.upload_photo(access_token=access_token, file=file)
+
+    async def get_all_photos(
+        self,
+        *,
+        access_token: str,
+    ) -> ResponseT[list[dict[str, Any]]]:
+        client = self.get_client(client_name="photo")
+        return await client.get_all_photos(access_token=access_token)
