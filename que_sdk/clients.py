@@ -249,7 +249,9 @@ class ProfileClient(BaseClient):
 
 class PhotoClient(BaseClient):
     async def upload_photo(
-        self, access_token: str, file: BinaryIO
+        self,
+        access_token: str,
+        file: BinaryIO | bytes,
     ) -> ResponseT[dict[str, Any]]:
         url = f"{self._base_url}/photos/"
         status_code, response = await self._make_request(

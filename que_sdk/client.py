@@ -271,7 +271,7 @@ class QueClient:
     async def upload_photo(
         self,
         *,
-        file: BinaryIO,
+        file: BinaryIO | bytes,
         access_token: str,
     ) -> ResponseT[dict[str, Any]]:
         client = self.get_client(client_name="photo")
