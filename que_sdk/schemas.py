@@ -60,7 +60,7 @@ class ProfileCreateSchema(BaseSchema):
     city: str
     latitude: float
     longitude: float
-    birthdate: datetime.datetime
+    birthday: datetime.datetime
     description: str
     interested_in: str
     hobbies: list[str]
