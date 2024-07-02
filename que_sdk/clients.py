@@ -226,7 +226,7 @@ class ProfileClient(BaseClient):
     ) -> ResponseT[dict[str, Any]]:
         url = f"{self._base_url}/profiles/{profile_id}"
         status_code, response = await self._make_request(
-            method="DELETE",
+            method="PATCH",
             url=url,
             access_token=access_token,
             json=data_in.model_dump(),
