@@ -252,13 +252,21 @@ class PhotoClient(BaseClient):
         self,
         access_token: str,
         file: BinaryIO | bytes,
+        filename: str | None = None,
     ) -> ResponseT[dict[str, Any]]:
+        if isinstance(file, bytes):
+            if filename is None:
+                raise ValueError("filename is required")
+            else:
+                files = {"file": (filename, file)}
+        else:
+            files = {"file": file}
         url = f"{self._base_url}/photos/"
         status_code, response = await self._make_request(
             method="POST",
             url=url,
             access_token=access_token,
-            files={"file": file},
+            files=files,
             headers={"Content-Type": "multipart/form-data; boundary=boundary"},
         )
         return http.HTTPStatus(status_code), response

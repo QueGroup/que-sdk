@@ -273,9 +273,12 @@ class QueClient:
         *,
         file: BinaryIO | bytes,
         access_token: str,
+        filename: str | None = None,
     ) -> ResponseT[dict[str, Any]]:
         client = self.get_client(client_name="photo")
-        return await client.upload_photo(access_token=access_token, file=file)
+        return await client.upload_photo(
+            access_token=access_token, file=file, filename=filename
+        )
 
     async def get_all_photos(
         self,
