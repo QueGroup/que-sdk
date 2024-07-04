@@ -229,7 +229,7 @@ class ProfileClient(BaseClient):
             method="PATCH",
             url=url,
             access_token=access_token,
-            json=data_in.model_dump(),
+            json=data_in.model_dump(exclude_none=True),
         )
         return http.HTTPStatus(status_code), response
 
